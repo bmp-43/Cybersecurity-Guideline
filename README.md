@@ -1,2 +1,444 @@
-# Cybersecurity-Guideline
-Red team focused cybersecurity curriculum - offensive security from intermediate to advanced. For those who already know the basics and want to break things professionally.
+# Cybersecurity Guideline
+
+> **Offensive security training for intermediate practitioners.**  
+> Red team techniques, exploitation methodologies, and hands-on vulnerable labs—documented in public.
+
+---
+
+## ⚠️ Who This Is For
+
+This is **NOT** a beginner's guide.
+
+**Prerequisites:**
+- Comfortable with Linux command line and filesystem
+- Basic programming knowledge (Python/Bash)
+- Understanding of networking fundamentals (TCP/IP, DNS, ports)
+- Knowledge of how web applications work (requests, responses, sessions)
+- Familiarity with HTTP methods and status codes
+
+If you're starting from zero, build foundations elsewhere first. This curriculum assumes technical literacy.
+
+---
+
+## 🎯 What This Is
+
+A **red team focused** learning path covering offensive security from intermediate to advanced exploitation.
+
+**Methodology:** Theory → Practice → Own Lab
+
+Each module includes:
+- **Phase 1:** Deep technical theory
+- **Phase 2:** Hands-on exploitation practice
+- **Phase 3:** Build and break your own vulnerable systems
+
+**Perspective:** Attacker mindset. Understanding exploitation to build better defenses.
+
+---
+
+## 📚 Full Curriculum
+
+### **Module 1: Foundations**
+**Theory:**
+- Complete URL → DNS → TCP → HTTP flow
+- HTTP request/response structure and abuse vectors
+- Cookie mechanics (structure, flags, SameSite)
+- Sessions vs tokens
+- CORS vs Same-Origin Policy
+- TCP handshake and teardown
+- UDP characteristics
+- Ports vs services mapping
+- DNS resolution step-by-step
+- ARP basics
+- Linux filesystem hierarchy
+- Linux permissions, users, groups
+- Processes, sockets, and open files
+
+**Practice:**
+- HTTP request replay and mutation in Burp Suite
+- Header, cookie, and method tampering
+- Session reuse and fixation testing
+- TCP stream reconstruction with Tshark
+- DNS traffic analysis
+- Nmap service/version detection + NSE scripting
+
+**Lab:**
+- Build minimal web service with custom logging
+- Send malformed requests and observe failures
+- Iterative fixing and re-testing
+
+---
+
+### **Module 2: OWASP Top 10**
+**Theory:**
+- OWASP methodology and purpose
+- Risk calculation (impact × likelihood)
+- A01: Broken Access Control
+- A02: Cryptographic Failures
+- A03: Injection
+- A04: Insecure Design
+- A05: Security Misconfiguration
+- A06: Vulnerable and Outdated Components
+- A07: Identification and Authentication Failures
+- A08: Software and Data Integrity Failures
+- A09: Security Logging and Monitoring Failures
+- A10: Server-Side Request Forgery (SSRF)
+- Mapping real-world vulnerabilities to categories
+
+**Practice:**
+- Identify OWASP category before exploitation
+- Exploit and justify classification
+- Propose and implement mitigations
+- Re-test after fixes
+
+**Lab:**
+- Build one vulnerability per OWASP category
+- Document exploitation proof
+- Secure redesign and validation
+
+---
+
+### **Module 3: Injection Attacks**
+**Theory:**
+- SQL query construction and contexts
+- String vs numeric injection
+- Error-based SQL injection
+- UNION-based SQL injection
+- Boolean blind SQL injection
+- Time-based blind SQL injection
+- Prepared statements and parameterization
+- Command injection mechanics
+- Command chaining techniques
+- NoSQL query logic and abuse vectors
+
+**Practice:**
+- Manual authentication bypass
+- Database enumeration (columns, tables)
+- Blind data extraction techniques
+- Timing inference attacks
+- Filter and WAF bypass
+- Remote command execution
+
+**Lab:**
+- Vulnerable backend with exploitable queries
+- Full database dump achievement
+- Parameterized query fixes
+- Input validation implementation
+
+---
+
+### **Module 4: Client-Side Attacks**
+**Theory:**
+- Browser parsing and execution rules
+- JavaScript execution contexts
+- Reflected XSS
+- Stored XSS
+- DOM-based XSS (sinks and sources)
+- Encoding vs escaping
+- Content Security Policy (CSP) logic and bypass
+- CSRF attack flow and token mechanics
+- SameSite cookie behavior
+- Clickjacking techniques
+
+**Practice:**
+- Custom XSS payload development
+- Filter and WAF bypass
+- Cookie exfiltration
+- CSP breaking attempts
+- Manual CSRF payload construction
+- Token bypass testing
+
+**Lab:**
+- Input feature with persistent XSS
+- Session theft demonstration
+- CSRF-vulnerable state-changing action
+- Defense implementation (CSP, tokens, SameSite)
+
+---
+
+### **Module 5: Authentication & Access Control**
+**Theory:**
+- Authentication vs authorization
+- Password hashing vs encryption
+- Salt implementation
+- Rate limiting mechanisms
+- Session identifier security
+- Session fixation attacks
+- JWT structure and claims
+- IDOR (Insecure Direct Object Reference) patterns
+- Horizontal vs vertical privilege escalation
+
+**Practice:**
+- IDOR enumeration and exploitation
+- Session hijacking and reuse
+- JWT claim manipulation
+- Role-based access control abuse
+- Brute force and credential stuffing
+
+**Lab:**
+- Multi-user system with role separation
+- Broken authorization checks
+- Exploitation demonstration
+- Correct authorization logic implementation
+
+---
+
+### **Module 6: Server-Side Attacks (SSRF & Advanced)**
+**Theory:**
+- SSRF routing and exploitation
+- Internal service enumeration
+- Cloud metadata endpoint attacks (AWS, GCP, Azure)
+- SSRF filter bypass techniques
+- XML External Entity (XXE) injection
+- Server-Side Template Injection (SSTI)
+
+**Practice:**
+- SSRF to localhost exploitation
+- Internal service probing
+- Cloud metadata extraction
+- XXE data exfiltration
+- SSTI to RCE
+
+**Lab:**
+- Internal-only administrative endpoint
+- External trigger mechanism
+- Network isolation and input validation
+- Defense validation testing
+
+---
+
+### **Module 7: File Vulnerabilities**
+**Theory:**
+- Path traversal mechanics and encoding tricks
+- Local File Inclusion (LFI)
+- Remote File Inclusion (RFI)
+- File upload validation failures
+- MIME type vs file extension
+- Web server execution rules
+- Magic bytes and file signatures
+
+**Practice:**
+- Path traversal exploitation
+- Sensitive file reads (/etc/passwd, config files)
+- Upload filter bypass (MIME, extension, content)
+- Webshell upload and execution
+- LFI to RCE exploitation chains
+
+**Lab:**
+- File upload handler with validation flaws
+- Path traversal vulnerability
+- Webshell execution demonstration
+- Secure file handling implementation
+
+---
+
+### **Module 8: Network Security**
+**Theory:**
+- OSI model vs TCP/IP stack
+- Man-in-the-Middle (MITM) attack flow
+- ARP spoofing mechanics
+- DNS poisoning techniques
+- Firewalls (stateful vs stateless)
+- IDS vs IPS (detection vs prevention)
+- VPN basics and tunneling
+
+**Practice:**
+- ARP poisoning execution
+- Credential interception (HTTP, FTP)
+- Traffic manipulation and injection
+- Detection evasion techniques
+- Firewall rule analysis
+
+**Lab:**
+- Multi-VM network environment
+- MITM attack setup
+- Traffic capture and analysis
+- Defense mechanism validation
+
+---
+
+### **Module 9: Cryptography**
+**Theory:**
+- Cryptographic hash functions
+- Collision resistance importance
+- Password storage best practices (bcrypt, Argon2)
+- Symmetric encryption concepts
+- Asymmetric encryption and key exchange
+- TLS handshake process
+- Certificate chains and validation
+- Common cryptographic failures (weak algorithms, ECB mode, padding oracles)
+
+**Practice:**
+- Hash cracking (rainbow tables, dictionary attacks)
+- Weak cryptography identification
+- TLS connection inspection
+- Downgrade attack analysis
+- Padding oracle exploitation
+
+**Lab:**
+- Application with weak cryptographic implementation
+- Data compromise demonstration
+- Strong cryptography redesign
+- Validation and testing
+
+---
+
+### **Module 10: Integration & Kill Chain**
+**Theory:**
+- Penetration testing methodology
+- Reconnaissance techniques
+- Attack surface mapping
+- Kill chain framework
+- Threat modeling approaches
+- Professional reporting standards
+
+**Practice:**
+- Timed full-scope CTF challenges
+- Multi-stage exploitation chains
+- Lateral movement techniques
+- Privilege escalation paths
+- Evidence collection and documentation
+
+**Lab:**
+- End-to-end vulnerable enterprise environment
+- Full system compromise from external access
+- Professional penetration testing report
+- Comprehensive mitigation strategy
+
+---
+
+# 📂 Repository Structure
+```
+cybersecurity-guideline/
+│
+├── README.md
+├── LICENSE
+├── .gitignore
+│
+├── Module - X/
+│   ├── README.md
+│   ├── theory/
+│   ├── practice/
+│   └── labs/
+├── tools/
+│   └── [custom security tools as developed]
+│
+├── write-ups/
+│   └── [CTF and lab solutions]
+│
+└── resources/
+    └── [cheatsheets, references, wordlists]
+```
+
+---
+
+## 🔧 Tools & Automation
+
+Custom offensive security tools will be developed throughout the curriculum:
+
+**Planned:**
+- HTTP security header auditor and reporter
+- SQL injection fuzzer with bypass techniques
+- XSS payload generator with encoding options
+- Network traffic analyzer and credential extractor
+- Automated reconnaissance framework
+
+*Tools added progressively as modules are completed.*
+
+---
+
+## ✍️ Articles
+
+Simplified breakdowns and attack explanations published on Medium.
+
+**Topics covered:**
+- HTTP security deep dives
+- Exploitation technique walkthroughs
+- Real-world vulnerability analysis
+- Defense and mitigation strategies
+
+*Article links will be added as content is published.*
+
+---
+
+## 📊 Current Progress
+
+- 🔄 **Module 1:** Foundations (In Progress)
+- ⬜ **Module 2:** OWASP Top 10
+- ⬜ **Module 3:** Injection Attacks
+- ⬜ **Module 4:** Client-Side Attacks
+- ⬜ **Module 5:** Authentication & Access Control
+- ⬜ **Module 6:** Server-Side Attacks
+- ⬜ **Module 7:** File Vulnerabilities
+- ⬜ **Module 8:** Network Security
+- ⬜ **Module 9:** Cryptography
+- ⬜ **Module 10:** Integration & Kill Chain
+
+**Last Updated:** December 31, 2024
+
+---
+
+## ⚖️ Legal Disclaimer
+
+**All content is for educational and authorized testing purposes only.**
+
+### Acceptable Use:
+- Personal isolated lab environments
+- Bug bounty programs (within defined scope)
+- Authorized penetration testing engagements with written permission
+- Academic and security research
+
+### Prohibited Use:
+- Unauthorized access to systems you do not own
+- Testing without explicit written permission
+- Any illegal activity
+
+**Unauthorized computer access is a crime in virtually all jurisdictions.**
+
+The techniques documented here are powerful and can cause significant damage if misused. The author assumes **no liability** for misuse, illegal activity, or damage caused by applying these techniques.
+
+**You are solely responsible for ensuring your testing is legal and authorized.**
+
+---
+
+## 🤝 Contributing
+
+This is primarily a personal learning journey, but community input is valued.
+
+- **Found an error?** Open an issue with details
+- **Have a better technique?** Start a discussion
+- **Want to add resources?** Pull requests welcome
+- **Security concern?** Contact privately
+
+---
+
+## 📬 Contact & Availability
+
+**Freelance Services:**
+- Technical cybersecurity content writing
+- Penetration testing documentation
+- Red team engagement reports
+- Security tool development
+- Vulnerability research write-ups
+
+📧 [your-email]  
+📝 [Medium Profile]  
+💼 [LinkedIn] *(optional)*  
+🐦 [Twitter/X] *(optional)*
+
+---
+
+## 📜 License
+
+Licensed under the Apache License 2.0 - see [LICENSE](LICENSE) for full details.
+
+**Summary:**
+- ✅ Use freely for any purpose
+- ✅ Modify and distribute
+- ✅ Use commercially
+- ⚠️ Must provide attribution
+- ⚠️ Must state significant changes
+- ⚠️ Includes patent grant protection
+
+---
+
+**Built with determination. Documented with transparency. Shared for education.**
