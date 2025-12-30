@@ -35,23 +35,17 @@ Each module includes:
 
 ---
 
-## 📚 Full Curriculum
+## 📚 Full Curriculum (In progress and changing)
 
 ### **Module 1: Foundations**
 **Theory:**
-- Complete URL → DNS → TCP → HTTP flow
-- HTTP request/response structure and abuse vectors
-- Cookie mechanics (structure, flags, SameSite)
-- Sessions vs tokens
-- CORS vs Same-Origin Policy
-- TCP handshake and teardown
-- UDP characteristics
-- Ports vs services mapping
-- DNS resolution step-by-step
-- ARP basics
-- Linux filesystem hierarchy
-- Linux permissions, users, groups
-- Processes, sockets, and open files
+- HTTP request lifecycle
+- HTTP request/response structure and flow
+- Headers, cookies, sessions, tokens
+- Security‑relevant headers and leakage
+- CORS vs Same‑Origin Policy
+- Browser‑enforced security boundaries
+- Core web attack surfaces
 
 **Practice:**
 - HTTP request replay and mutation in Burp Suite
@@ -420,10 +414,9 @@ This is primarily a personal learning journey, but community input is valued.
 - Security tool development
 - Vulnerability research write-ups
 
-📧 [your-email]  
-📝 [Medium Profile]  
-💼 [LinkedIn] *(optional)*  
-🐦 [Twitter/X] *(optional)*
+📧 email: martinsimonyan2563@gmail.com
+📝 medium: https://medium.com/@aegis-martin
+🐦 twitter: not here yet :)
 
 ---
 
