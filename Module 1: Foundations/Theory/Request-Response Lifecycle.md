@@ -1,5 +1,4 @@
 # Request-Response Lifecycle
-## **The Lifecycle of an HTTP Network Request**
 
 When we send a HTTP request we receive our response almost immediately, but is that process actually that easy? What's happening behind the scenes? In this Article I will explain the full life-cycle of HTTP.
 
