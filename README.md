@@ -5,6 +5,22 @@
 
 ---
 
+
+> [!CAUTION]
+> The content in this repository is provided **strictly for educational, training, and defensive security research purposes**.  
+> It describes techniques and concepts observed in real-world attacks to help developers, defenders, and security practitioners **understand and mitigate vulnerabilities**.  
+>
+> **You must NOT use any of the information, tools, techniques, or examples contained herein for illegal activity, unauthorized access, exploitation of systems you do not own, or any purpose outside of a controlled lab or authorized engagement.**  
+>
+> Unauthorized use of offensive security techniques can cause serious harm, violate laws in most jurisdictions, and may result in civil or criminal penalties.  
+>
+> By accessing or using this repository you acknowledge that:
+>
+> * All activities must be conducted in a **personal isolated lab, within a bug bounty scope with permission, or under written authorization**.  
+> * The authors **assume no liability** for misuse, damages, or any legal consequences arising from actions taken based on these materials.  
+> * You are **solely responsible** for ensuring compliance with applicable laws and approvals before testing.
+
+
 ## ⚠️ Who This Is For
 
 This is **NOT** a beginner's guide.

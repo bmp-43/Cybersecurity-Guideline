@@ -3,6 +3,12 @@
 This module builds the technical foundation required for web application security testing.  
 Focus is placed on how HTTP works internally, how browsers enforce security, and where real-world attack surfaces emerge.
 
+
+> [!CAUTION]
+> The following material is intended for **educational and defensive security research purposes only**.  
+> It describes techniques observed in real-world attacks to help developers, defenders, and security practitioners understand and mitigate **cache poisoning vulnerabilities**.  
+> **No authorization or encouragement for illegal activity is implied.**
+
 ## Theory
 Covers the core mechanics of web communication and security boundaries:
 - HTTP request lifecycle
