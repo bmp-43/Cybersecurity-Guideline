@@ -1,4 +1,3 @@
-# HTTP internals
 ## **HTTP Security headers Introduction**
 
 Here we will focus on basic theory on what HTTP headers are exactly.
