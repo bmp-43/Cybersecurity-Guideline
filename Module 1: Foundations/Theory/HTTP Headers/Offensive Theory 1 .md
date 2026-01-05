@@ -214,7 +214,7 @@ Now we will try a harder example:
         
         we can potentially have a chance to find recent bugs that may be exploitable.
     
-    And so on. Here specifically no vulnerabilities are claimed, but they can be, in different cases that are close to this example.
+    And so on, you can try this now with 2 other custom headers. Here specifically no vulnerabilities are claimed, but they can be, in different cases that are close to this example.
 
 Now we see repos where that header is used and can read its code, comments, questions, issues around them etc. This will help us understand what they do, and get us into the blood-trail. 
 
