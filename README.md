@@ -53,6 +53,34 @@ Each module includes:
 
 ## 📚 Full Curriculum (In progress and changing)
 
+---
+
+## 🛠️ Tool Methodology
+
+Progressive documentation of offensive security tooling and tradecraft.
+
+**Coverage:**
+- Burp Suite: Request interception, parameter manipulation, session analysis
+- cURL: Protocol testing, header injection, authentication bypass
+- Nmap: Service enumeration, version detection, NSE exploitation
+- Metasploit: Exploit delivery, payload generation, post-exploitation
+- SQLMap: Injection testing, database enumeration, blind exploitation
+- Custom scripting: Automation patterns, API interaction, data parsing
+
+Each methodology document includes:
+- **Technical foundation**: What the tool does and why it matters
+- **Security testing workflows**: How to use it for vulnerability discovery
+- **Real exploitation examples**: Practical application against vulnerable targets
+- **Common pitfalls**: What breaks, what fails, and how to troubleshoot
+
+*Methodology docs are added as tools are mastered during module progression.*
+
+---
+
+## 🔬 Labs 
+
+Custom Labs will be created progressively.
+
 ### **Module 1: Foundations**
 **Theory:**
 - HTTP request lifecycle
@@ -70,11 +98,6 @@ Each module includes:
 - TCP stream reconstruction with Tshark
 - DNS traffic analysis
 - Nmap service/version detection + NSE scripting
-
-**Lab:**
-- Build minimal web service with custom logging
-- Send malformed requests and observe failures
-- Iterative fixing and re-testing
 
 ---
 
@@ -100,11 +123,6 @@ Each module includes:
 - Propose and implement mitigations
 - Re-test after fixes
 
-**Lab:**
-- Build one vulnerability per OWASP category
-- Document exploitation proof
-- Secure redesign and validation
-
 ---
 
 ### **Module 3: Injection Attacks**
@@ -127,12 +145,6 @@ Each module includes:
 - Timing inference attacks
 - Filter and WAF bypass
 - Remote command execution
-
-**Lab:**
-- Vulnerable backend with exploitable queries
-- Full database dump achievement
-- Parameterized query fixes
-- Input validation implementation
 
 ---
 
@@ -157,12 +169,6 @@ Each module includes:
 - Manual CSRF payload construction
 - Token bypass testing
 
-**Lab:**
-- Input feature with persistent XSS
-- Session theft demonstration
-- CSRF-vulnerable state-changing action
-- Defense implementation (CSP, tokens, SameSite)
-
 ---
 
 ### **Module 5: Authentication & Access Control**
@@ -184,12 +190,6 @@ Each module includes:
 - Role-based access control abuse
 - Brute force and credential stuffing
 
-**Lab:**
-- Multi-user system with role separation
-- Broken authorization checks
-- Exploitation demonstration
-- Correct authorization logic implementation
-
 ---
 
 ### **Module 6: Server-Side Attacks (SSRF & Advanced)**
@@ -207,12 +207,6 @@ Each module includes:
 - Cloud metadata extraction
 - XXE data exfiltration
 - SSTI to RCE
-
-**Lab:**
-- Internal-only administrative endpoint
-- External trigger mechanism
-- Network isolation and input validation
-- Defense validation testing
 
 ---
 
@@ -233,12 +227,6 @@ Each module includes:
 - Webshell upload and execution
 - LFI to RCE exploitation chains
 
-**Lab:**
-- File upload handler with validation flaws
-- Path traversal vulnerability
-- Webshell execution demonstration
-- Secure file handling implementation
-
 ---
 
 ### **Module 8: Network Security**
@@ -257,12 +245,6 @@ Each module includes:
 - Traffic manipulation and injection
 - Detection evasion techniques
 - Firewall rule analysis
-
-**Lab:**
-- Multi-VM network environment
-- MITM attack setup
-- Traffic capture and analysis
-- Defense mechanism validation
 
 ---
 
@@ -284,12 +266,6 @@ Each module includes:
 - Downgrade attack analysis
 - Padding oracle exploitation
 
-**Lab:**
-- Application with weak cryptographic implementation
-- Data compromise demonstration
-- Strong cryptography redesign
-- Validation and testing
-
 ---
 
 ### **Module 10: Integration & Kill Chain**
@@ -308,12 +284,6 @@ Each module includes:
 - Privilege escalation paths
 - Evidence collection and documentation
 
-**Lab:**
-- End-to-end vulnerable enterprise environment
-- Full system compromise from external access
-- Professional penetration testing report
-- Comprehensive mitigation strategy
-
 ---
 
 # 📂 Repository Structure
@@ -327,32 +297,17 @@ cybersecurity-guideline/
 ├── Module - X/
 │   ├── README.md
 │   ├── theory/
-│   ├── practice/
-│   └── labs/
-├── tools/
-│   └── [custom security tools as developed]
+│   └── practice/
+│   
+├── Tool Methodology/
+│   └── [Write up and tradecrafts of Security tools]
 │
-├── write-ups/
-│   └── [CTF and lab solutions]
+├── Labs/
+│   └── [CTF, Labs and their solutions]
 │
 └── resources/
-    └── [cheatsheets, references, wordlists]
+    └── [cheatsheets, references, wordlists, Lab Setups]
 ```
-
----
-
-## 🔧 Tools & Automation
-
-Custom offensive security tools will be developed throughout the curriculum:
-
-**Planned:**
-- HTTP security header auditor and reporter
-- SQL injection fuzzer with bypass techniques
-- XSS payload generator with encoding options
-- Network traffic analyzer and credential extractor
-- Automated reconnaissance framework
-
-*Tools added progressively as modules are completed.*
 
 ---
 
