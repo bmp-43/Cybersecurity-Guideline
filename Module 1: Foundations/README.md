@@ -28,12 +28,6 @@ Hands-on interaction with live traffic and protocols:
 - DNS traffic analysis
 - Nmap service and version detection with NSE scripting
 
-## Lab
-Applied experimentation and failure-driven learning:
-- Build a minimal web service with custom logging
-- Send malformed and edge-case requests
-- Observe failures, fix issues, and re-test iteratively
-
 ---
 
 By the end of this module, the student should understand **how web traffic actually behaves**, **where security assumptions fail**, and **how attackers interact with applications at the protocol level**.
