@@ -5,7 +5,7 @@ When we send a HTTP request we receive our response almost immediately, but is t
 > [!IMPORTANT]
 > This is not a complete beginner friendly material its recommended to have prior minimal web/security experience.
 
-#### **Step 1 - Client Prepares HTTP/HTTPS Request**
+## **Step 1 - Client Prepares HTTP/HTTPS Request**
 
 The client (browser or application) prepares an HTTP or HTTPS request for the required resource (HTML, image, file, or API endpoint). The request includes:
 
@@ -16,7 +16,8 @@ The client (browser or application) prepares an HTTP or HTTPS request for the re
 
 For HTTPS, encryption setup begins here, preparing the request for a secure transmission. This step initiates the lifecycle of the HTTP request.
 
-#### **Step 2 - Local DNS Resolver \[Request\]**
+## **Step 2 - Local DNS Resolver
+\[Request\]**
 
 The client relies on the local DNS resolver to convert the requested domain into an IP address. The resolver first checks the local cache. If the IP is not cached, the query is forwarded to recursive DNS servers.
 
@@ -26,7 +27,7 @@ Key points:
 *   Caching improves performance and reduces unnecessary external queries.
 *   Understanding this step helps troubleshoot network issues and ensures the client can locate the server efficiently.
 
-#### **Step 3: Recursive DNS Servers \[Request\]**
+## **Step 3: Recursive DNS Servers \[Request\]**
 
   
 If the local DNS doesn't have the IP address you're looking for, the query is sent to a series of DNS servers. These are usually managed by your ISP (Internet Service Provider) or another third-party provider. The recursive DNS servers have their own caches, and if they can't satisfy the request, they'll talk to root DNS servers, followed by TLD (Top-Level Domain) servers and finally the authoritative DNS servers for the domain. This is a hierarchical structure and often takes several steps.  
@@ -53,7 +54,7 @@ If the local DNS doesn't have the IP address you're looking for, the query is se
 
 Each query might also involve multiple DNS servers before finally getting the correct IP address. Once the IP address is found, it's returned to the client and stored in the local cache for future use. Recursive DNS servers are vital cogs in the DNS architecture, connecting local queries to the global DNS infrastructure.
 
-#### **Step 4: ARP Basics (Local Network Only) \[Request\]**
+## **Step 4: ARP Basics (Local Network Only) \[Request\]**
 
 After DNS gives the target IP (or gateway IP), if the next hop is on the local network, the client needs the MAC address for layer 2 delivery. It uses ARP (Address Resolution Protocol):
 
@@ -69,7 +70,7 @@ After DNS gives the target IP (or gateway IP), if the next hop is on the local n
 
 Summary: ARP bridges layer 3 (IP) to layer 2 (MAC), letting packets leave your machine properly on local networks.
 
-#### **Step 5: TCP & SSL/TLS Handshake (if HTTPS) \[Request\]**
+## **Step 5: TCP & SSL/TLS Handshake (if HTTPS) \[Request\]**
 
 Before any data is securely transmitted, the client must first establish a reliable connection with the server using the **TCP three-way handshake**:
 
@@ -99,7 +100,7 @@ Once the TCP connection is established, the **TLS handshake** begins to secure t
 
 Now the connection is secure and ready.
 
-#### **Step 6: ISP Kickoff & Initial Transit \[Request\]**
+## **Step 6: ISP Kickoff & Initial Transit \[Request\]**
 
   
 After the connection is established, packets containing the HTTP request begin their journey across the internet, starting with the **Internet Service Provider (ISP)**. The ISP serves as the primary gateway, routing data through its high-speed backbone networks and peering points.
@@ -114,7 +115,7 @@ This phase marks the transition from local network to global internet routing, w
 *   Early **deep packet inspection (DPI)** or **carrier-grade NAT (CGNAT)** possible for security, monitoring, or IPv4 conservation.
 *   Potential injection of headers (e.g., X-Forwarded-For in some transparent proxies).
 
-#### **Step 7: Deep Routing Through Routers & Nodes \[Request\]**
+## **Step 7: Deep Routing Through Routers & Nodes \[Request\]**
 
 Packets proceed through the core internet infrastructure, traversing multiple **autonomous systems (AS)** and network hops across global backbones.
 
@@ -128,7 +129,7 @@ Packets proceed through the core internet infrastructure, traversing multiple **
 
 Tools like **traceroute** or **mtr** reveal this multi-hop process, highlighting potential points of delay or failure.
 
-#### **Step 8: Firewalls En Route \[Request\]**
+## **Step 8: Firewalls En Route \[Request\]**
 
 Packets encounter multiple **firewall** and security appliance instances throughout the transit path, providing defense-in-depth screening.
 
@@ -142,7 +143,7 @@ Packets encounter multiple **firewall** and security appliance instances through
 
 Effective firewall chaining significantly reduces the **attack surface** and blocks reconnaissance before requests reach the application.
 
-#### **Step 9: Cache Servers & CDN Check \[Request\]**
+## **Step 9: Cache Servers & CDN Check \[Request\]**
 
 **Distributed caching** layers intercept requests to potentially serve content without reaching the **origin server**, dramatically improving performance.
 
@@ -156,7 +157,7 @@ Effective firewall chaining significantly reduces the **attack surface** and blo
 
 CDNs are critical for reducing **latency** on high-traffic sites, cutting origin load by 70–90% for static assets.
 
-#### **Step 10: Server-Side Load Balancer \[Request\]**
+## **Step 10: Server-Side Load Balancer \[Request\]**
 
 Upon reaching the destination network, a **load balancer** (hardware or software) distributes incoming traffic across backend servers for scalability and resilience.
 
@@ -170,7 +171,7 @@ Upon reaching the destination network, a **load balancer** (hardware or software
 
 Load balancers enable **horizontal scaling**, **high availability**, and zero-downtime deployments in modern web architectures.
 
-#### **Step 11: OS Network Stack on Server \[Request\]**
+## **Step 11: OS Network Stack on Server \[Request\]**
 
 The selected backend server receives packets, where the **operating system kernel** processes them before delivery to the application process.
 
@@ -184,7 +185,7 @@ The selected backend server receives packets, where the **operating system kerne
 
 Modern kernels optimize this with **zero-copy**, GRO/GSO offloading, and interrupt coalescing for minimal overhead under high load.
 
-#### **Step 12: Application Processing, Logic & Response Build \[Response\]**
+## **Step 12: Application Processing, Logic & Response Build \[Response\]**
 
 The web application (or reverse proxy like Nginx) receives the parsed HTTP request and executes all required processing before constructing the response.
 

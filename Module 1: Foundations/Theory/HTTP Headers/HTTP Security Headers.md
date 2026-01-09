@@ -1,8 +1,8 @@
-## **HTTP Security headers Introduction**
+# **HTTP Security headers Introduction**
 
 Here we will focus on basic theory on what HTTP headers are exactly.
 
-#### **Step 1: Introduction**
+## **Step 1: Introduction**
 
 In web application penetration testing , understanding HTTP security headers is crucial for identifying vulnerabilities that can be exploited by attackers. This document provides an in-depth overview of the most relevant headers, explaining:
 
@@ -12,11 +12,11 @@ In web application penetration testing , understanding HTTP security headers is
 
 Content is divided between **Request Headers** (sent by the client) and **Response Headers** (sent by the server), followed by **Real-World Exploits** and **Recommendations**.
 
-#### **Step 2: Request Headers**
+## **Step 2: Request Headers**
 
 These headers originate from the browser or client application and carry important context or credentials.
 
-##### **2.1 Origin**
+### **2.1 Origin**
 
 *   **What:** Indicates the origin of the request, comprising protocol, host, and port.
 *   **Why:** Used by servers to enforce Cross-Origin Resource Sharing (CORS) policies. CORS determines what domains are allowed to talk to the server, it is enforced by browser. By checking `Origin`, a server can allow or block cross-origin requests.
@@ -50,7 +50,7 @@ curl -H "Origin: https://abc.com" -I https://URL/api/resource
 > 
 > Simply put, if the Origin in our request doesn’t match what the server allows, the browser blocks access to the response. However **the server may still respond**, but the **browser won’t let JS read it**. That’s the key CORS point most people miss.
 
-##### **2.2 Referer**
+### **2.2 Referer**
 
 > [!IMPORTANT]
 > IMPORTANT: In browsers and this domain overall the name is misspelled so we use Referer not the correct English word “referrer”
@@ -86,7 +86,7 @@ or serve header (modern practice):
 Referrer-Policy: strict-origin-when-cross-origin
 ```
 
-## **2.3 Authorization**
+### **2.3 Authorization**
 
 Authorization is needed to prove to the server that you are **allowed** to enter and do x, its not the same as **Authentication** which is for proving who **you**  are.
 
@@ -144,7 +144,7 @@ This is safer than Basic credentials because stealing this we steal **session** 
 > 2.  Use Burp Suite to intercept and modify the header to test for token reuse or impersonation.
 > 3.  Check if tokens expire properly by replaying old tokens.
 
-#### **2.4 User-Agent**
+### **2.4 User-Agent**
 
 *   **What:** Identifies the client application and version, telling the server ‘characteristics’ of the requester, e.g., `Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/... Chrome/... Safari/...`.
 *   **Why:** Servers can use **User-Agent** for content negotiation or device-specific functionality, like desktop vs mobile layout etc. In security, determining if server discloses platform-specific info or behaves differently for certain agents can reveal vulnerabilities. From attacker's perspective if server changes its behavior because of different user agent that's - ‘**Interesting’****.** If the server:  
@@ -175,7 +175,7 @@ Here we are checking:
 > Basically User‑Agent tells the server what you _claim_ to be, not what you _are_.  
 > Any security based on it, is cosmetic at best, exploitable at worst.
 
-#### **2.5 Cookie**
+### **2.5 Cookie**
 
 *   **What:** Cookies are tiny pieces of data the server gives your browser to remember you. They are sent automatically as name=value pairs of stored cookies, like:
     
@@ -246,7 +246,7 @@ Any of these combined → attacker fully owns your session, sometimes without yo
 > **Example:** `https://site.com/login?sessionId=ATTACKER123` → victim logs in → server keeps `sessionId=ATTACKER123` → attacker reuses it to access the account.  
 > **Mitigation:** always regenerate session ID on login and ignore externally supplied IDs.
 
-#### **2.6 Content-Type / Accept**
+### **2.6 Content-Type / Accept**
 
 *   **What:** `Content-Type` indicates the media type of the request body 
     
@@ -370,7 +370,7 @@ Observe:
 
 These are the primary security headers to instruct browsers on handling content and interactions.
 
-#### **3.1 Content-Security-Policy (CSP)**
+### **3.1 Content-Security-Policy (CSP)**
 
 *   **What:** A powerful security layer that defines where browsers can load resources (scripts, styles, images, frames) from, which prevents execution of injected malicious scripts since CSP will not tolerate their execution. It can also mitigate inline script/style risks and prevent eval().
 *   **Why:** Prevents Cross-Site Scripting (XSS), data injection, and mixed-content issues. By limiting resource origins, CSP reduces the risk of malicious third-party scripts executing.
@@ -426,7 +426,7 @@ Content-Security-Policy:
 > [!IMPORTANT]
 > CSP is a mitigation layer, not a replacement for input validation.
 
-#### **3.2 Strict-Transport-Security (HSTS)**
+### **3.2 Strict-Transport-Security (HSTS)**
 
 *   **What:** Tells browsers to only connect via HTTPS for a specified time period (`max-age`), optionally including subdomains and enabling site on HSTS preload lists. Site will NOT connect over HTTP. HSTS only works **after the first HTTPS visit, unless preloaded.**
 *   **Why:** Prevents downgrade attacks (forcing HTTP) and SSL-stripping. Ensures all future requests use encrypted channels, protecting cookies and sensitive data in transit.
@@ -457,7 +457,7 @@ This means “For one year, force HTTPS everywhere, including subdomains, even b
 > [!NOTE]
 > Once a domain is preloaded, removing HSTS requires browser list updates and can take months.
 
-#### 3.3 X-Frame-Options
+### 3.3 X-Frame-Options
 
 *   **What:** Controls whether a browser can display the page in an `<iframe>`. An `<iframe>` (inline frame) is an HTML element that embeds another HTML document within the current page. It allows separate content to be loaded independently while keeping it part of the parent document’s layout. Three directives exist:
 *   `DENY`: Prevents any framing.
@@ -483,7 +483,7 @@ X-Frame-Options: SAMEORIGIN
 > [!IMPORTANT]
 > X-Frame-Options is deprecated in favor of CSP `frame-ancestors`, which provides finer control.
 
-#### 3.4 X-Content-Type-Options
+### 3.4 X-Content-Type-Options
 
 Sometimes browsers try to be smart and _guess_ what a file ‘really’ is. This header prevents that.
 
@@ -512,7 +512,7 @@ Always set on responses that serve user-uploaded content or files with a defined
 > [!NOTE]
 > This header has no performance or compatibility downsides and should be enabled by default, for security reasons. This header is particularly important for legacy browsers and edge cases where MIME sniffing is still applied.
 
-#### 3.5 Referrer-Policy
+### 3.5 Referrer-Policy
 
 *   **What:** Controls the amount of referrer information (website URL) sent with requests when navigating from one page to another or when fetching resources. Basically when we click a link in site A and get redirected to site B, the referrer-policy determines how much should site B know about site A.
 *   **Why:** Prevents leaking sensitive URLs or query parameters to third-party sites. URLs are not harmless they can easily contain crucial data. For example:
@@ -548,7 +548,7 @@ Common values:
 > [!NOTE]
 > Referrer-Policy reduces passive data leakage without impacting application logic.
 
-#### 3.6 Permissions-Policy (Feature-Policy)
+### 3.6 Permissions-Policy (Feature-Policy)
 
 *   **What:** Browsers have powerful features. Camera, mic, GPS, sensors. Permissions-Policy is telling the browser **which features this site and embedded content are even allowed to ask for**. For example if camera permission is blocked in API, even if user clicks “allow” the site will not let camera to activate.
 *   **Why:** Some attacks don’t always exploit bugs. They exploit **permissions**.
@@ -605,7 +605,7 @@ This applies to **iframes** too.
     That proves enforcement is server-side, not UI-based.
 *   Check response headers via DevTools or `curl -I`.
 
-#### 3.7 Access-Control-Allow-Origin (CORS)
+### 3.7 Access-Control-Allow-Origin (CORS)
 
 *   **What:** Browsers block cross-site requests by default. CORS (Cross-Origin Resource Sharing) Specifies which origins can access the server resource in a cross-origin context. Can be a single domain or wildcard (`*`).
 *   **Why:** Controls and restricts cross-origin access to APIs and resources. Misconfigured CORS is a goldmine for attackers. For example:
@@ -640,7 +640,7 @@ This applies to **iframes** too.
 > [!NOTE]
 > Proper CORS configuration prevents unauthorized cross-origin access and enforces SOP, protecting sensitive APIs and user data.
 
-#### 3.8 Cross-Origin-Resource-Policy (CORP)
+### 3.8 Cross-Origin-Resource-Policy (CORP)
 
 *   **What:** This is a resource-side header that says **who is allowed to load this resource in a cross-origin context**. 
     
@@ -665,7 +665,7 @@ Cross-Origin-Resource-Policy: same-origin
 > [!TIP]
 > COEP + CORP together = page enforces “I only want CORP-compliant resources” and resource enforces “only trusted pages can use me.” Both must line up, otherwise the browser blocks it. COEP will be explained in no time later on!
 
-#### 3.9 Access-Control-Allow-Credentials
+### 3.9 Access-Control-Allow-Credentials
 
 *   **What:** Indicates whether the response to a request can be exposed when credentials (cookies, authorization headers) are included, by default they're not. 
     
@@ -706,7 +706,7 @@ If data is returned when origin is not trusted, CORS is misconfigured.
 > [!NOTE]
 > Enables cross-origin requests with credentials while enforcing origin restrictions to prevent session hijacking.
 
-#### 3.10 Set-Cookie with Flags
+### 3.10 Set-Cookie with Flags
 
 We already covered cookies in section 2.5, here we will focus on the implementation.
 
@@ -730,7 +730,7 @@ We already covered cookies in section 2.5, here we will focus on the implementat
     *   Cross-site requests → check if cookie is sent only if SameSite allows
     *   Inspect network → confirm Secure cookies travel over HTTPS only
 
-#### 3.11 Cache-Control / Pragma / Expires
+### 3.11 Cache-Control / Pragma / Expires
 
 *   **What:** These headers control how browsers and intermediate proxies store copies of responses. They determine **if, how long, and under what conditions content can be cached**.
     *   **Cache-Control** → modern, flexible caching rules (`no-store`, `no-cache`, `must-revalidate`)
@@ -778,7 +778,7 @@ We already covered cookies in section 2.5, here we will focus on the implementat
 > [!NOTE]
 > Proper caching headers prevent sensitive data from being stored in browser or proxy caches, reducing exposure of tokens, PII, or session info.
 
-#### 3.12 Cross-Origin-Embedder-Policy (COEP)
+### 3.12 Cross-Origin-Embedder-Policy (COEP)
 
 *   **What:** Governs whether a document can load cross-origin resources that do not grant permission via CORP/CORS. A resource might allow its usage by other servers but unless your COEP explicitly allows to accept data from that specific resource, it'll be blocked. 
     
@@ -804,7 +804,7 @@ We already covered cookies in section 2.5, here we will focus on the implementat
     *   Open DevTools → Console → check for **COEP-related errors**
     *   Verify that trusted resources with CORP/CORS headers still load
 
-#### 3.13 Cross-Origin-Opener-Policy (COOP)
+### 3.13 Cross-Origin-Opener-Policy (COOP)
 
 *   **What:** Tells the browser how your page interacts with other pages opened via `window.open()` in cross-origin scenarios. 
     
@@ -890,4 +890,4 @@ Cross-Origin-Opener-Policy: same-origin
 *   `Cross-Origin-*` headers (COOP, COEP, CORP): Hardens cross-origin interactions to prevent data leakage and side-channel attacks.
 
 > [!TIP]
-> **The tools for testing such as curl, Burp Suite, OWASP ZAP etc. will be discussed in next chapters!**
+> **The tools for testing such as curl, Burp Suite, OWASP ZAP etc. will be discussed in methodology as project progresses!**

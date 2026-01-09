@@ -1,12 +1,12 @@
 # HTTP Security Headers - Offensive Theory 2
-## HTTP Security Headers and Cache poisoning
+# Cache poisoning
 
 In this section, we will focus on cache poisoning. Cache poisoning occurs when a cache, which is intended to improve performance and conserve resources, is manipulated to store malicious content. In the following examples we will describe how cache poisoning is abused from an attacker’s perspective, followed by corresponding mitigation strategies. For the test we will be using `X-Forwarded-Host` header.
 
 > [!CAUTION]
 > The following material is intended for educational and defensive security research purposes only. It describes techniques observed in real-world attacks to help developers, defenders, and security practitioners understand and mitigate cache poisoning vulnerabilities. No authorization or encouragement for illegal activity is implied.
 
-### **Preparation for the attack - Attackers Perspective**
+## **Preparation for the attack - Attackers Perspective**
 
 1.  First we must confirm whether the site blindly trusts `X-Forwarded-Host`:
     
@@ -67,9 +67,9 @@ In this section, we will focus on cache poisoning. Cache poisoning occurs when a
         ```sh
         curl -I "https://target-site.com"
         ```
-    3.  Now it's time to actually poison our cache. There are multiple ways of taking advantage of this situation. We will cover the mainstream ways to do so.
+    3.  Now it's time to actually poison our cache. 
 
-### **Preparation for the attack - Defenders Perspective**
+## **Preparation for the attack - Defenders Perspective**
 
 *   **Do not trust** `**X-Forwarded-Host**` **by default**  
     Treat it as user input. Only accept it from trusted internal proxies and validate it strictly. Otherwise ignore or strip it.
@@ -90,7 +90,9 @@ In this section, we will focus on cache poisoning. Cache poisoning occurs when a
 *   **Monitor and test**  
     Watch for cache anomalies and regularly test host header and cache behavior the same way an attacker would.
 
-### **Option 1: XSS cache poisoning attack - Attackers Perspective**
+**There are multiple ways of taking advantage of this situation. We will cover the mainstream ways to do so.**
+    
+## **Option 1: XSS cache poisoning attack - Attackers Perspective**
 
 If we oversimplify, XSS attack occurs when the threat actor runs a malicious JavaScript code in users browser under the site's context. Those scripts can steal data, redirect user to a malicious site, etc. Now lets see how it can be executed in our context.
 
@@ -306,7 +308,7 @@ If any of these work, then the CSP bypass is possible and it's time to inject ou
         1.  Register domains like secure-vuln site.com or vuln-site-resources.net — looks legit, delays suspicion.
         2.  Obfuscate your JS: Minify, encrypt strings, use eval(fromCharCode), no obvious alerts. Make it silent — only exfil data, no popups/deface.
 
-### **XSS cache poisoning attack - Defenders Perspective**
+## **XSS cache poisoning attack - Defenders Perspective**
 
 *   **Never reflect request headers into HTML**  
     Not in `src`, `href`, `title`, meta tags, JSON, anywhere. Headers are transport metadata, not template variables. If a header reaches HTML, someone screwed up.
@@ -334,7 +336,7 @@ If any of these work, then the CSP bypass is possible and it's time to inject ou
 *   **Actively test your own site like an attacker**  
     Inject quotes, encoded payloads, broken hosts, weird headers. If the HTML breaks, attackers already found it.
 
-### **Option 2: Cache poisoned DoS (CPDoS) attack - Attackers Perspective**
+## **Option 2: Cache poisoned DoS (CPDoS) attack - Attackers Perspective**
 
 A Cache-Poisoned Denial-of-Service **(CPDoS)** is achieved when an attacker caches a malicious or malformed response that causes the legitimate page content to become inaccessible. Once stored in the cache, the poisoned response is served to all users attempting to access the affected resource – effectively resulting in a denial of service.
 
@@ -374,7 +376,7 @@ A Cache-Poisoned Denial-of-Service **(CPDoS)** is achieved when an attacker cach
     However chance of failure here is high since most setups DON'T cache non-200 responses. To fight against this we will have to spider the web to find an endpoint that WILL cache our poison.
 3.  **Execute the DoS Poison:**
     
-    Finally after confirming that Poisoning is possible its time to unleash our attack.
+    Finally after confirming that Poisoning is possible it's time to unleash our attack.
     
     1.  Send poisoned request to the target endpoint. Example for Oversized Host attack:
         
@@ -390,7 +392,7 @@ A Cache-Poisoned Denial-of-Service **(CPDoS)** is achieved when an attacker cach
     2.  **Multi-layer caches**: Poison CDNs first, then origins if possible.
     3.  **Defenses to watch**: WAFs might block weird headers; test stealthy. If hosts are normalized poison will be **useless**.
 
-### **Cache poisoned DoS (CPDoS) attack - Defenders Perspective**
+## **Cache poisoned DoS (CPDoS) attack - Defenders Perspective**
 
 *   **Do not trust client-controlled headers**  
     Ignore or strictly validate `X-Forwarded-Host`, `X-Forwarded-Proto`, `Host`, etc. Only accept values from trusted reverse proxies.
@@ -409,7 +411,7 @@ A Cache-Poisoned Denial-of-Service **(CPDoS)** is achieved when an attacker cach
 *   **Monitor cache behavior**  
     Log cache hits involving redirects or unusual headers. Poisoning often leaves fingerprints before damage.
 
-### **Option 3: Open redirect / phishing boost by cache poisoning - Attackers Perspective**
+## **Option 3: Open redirect / phishing boost by cache poisoning - Attackers Perspective**
 
 If you are familiar with phishing (what it is and how it usually occurs), then understanding this attack is not difficult. In this case, a poisoned cache causes the victim’s browser to redirect to a resource controlled by the attacker. This can result in users willingly submitting credentials through social engineering, or unintentionally leaking session tokens or cookies.
 
@@ -455,7 +457,7 @@ To perform this kind of attack, the following steps must be satisfied.
 > 
 > **Browser caching bonus**: If response lacks no-cache headers, victims' local browsers cache the poison too—persists even after CDN evicts.
 
-### **Option 3: Open redirect / phishing boost by cache poisoning - Defenders Perspective**
+## **Option 3: Open redirect / phishing boost by cache poisoning - Defenders Perspective**
 
 *   **Threat model**  
     Treat all client‑supplied headers as untrusted by default.

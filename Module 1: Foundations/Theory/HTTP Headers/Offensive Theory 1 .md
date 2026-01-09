@@ -1,5 +1,5 @@
 # HTTP Security Headers - Offensive Theory Part 1
-## Custom and Standardized HTTP headers - Vary HTTP header
+# Custom and Standardized HTTP headers - Vary HTTP header
 
 HTTP headers control how browsers and servers interact with data so vulnerabilities in them may affect the whole application. Headers can reveal running services, software versions, and programming languages employed by the application. Such details help in tailoring payloads and selecting appropriate attack methods for further testing or direct HTTP header exploitation.
 
@@ -7,7 +7,7 @@ Real-world examples are used to illustrate how header analysis contributes to vu
 
 Custom headers are the headers made exclusively for that specific application by their developer team. Usually their names start with `X-` But now it is more common to see regular names, BUT we can still verify if header is custom or standard.
 
-##### Why Pay Attention?
+## Why Pay Attention?
 
 There are multiple reasons on why custom made headers can be an interesting finding for VAPT. They are not standardized headers defined by RFC, so they lack strict specifications which VAPT team should be paying attention to.
 
@@ -21,7 +21,7 @@ There are multiple reasons on why custom made headers can be an interesting find
 > [!IMPORTANT]
 > A header becomes security-relevant only when backend logic changes behavior based on its presence or value. It is crucial to note that custom headers spotting is not for finding the vulnerability itself, its a blood-trail that will potentially lead us to the security hole.
 
-##### How to spot them?
+## How to spot them?
 
 While headers with X- at the beginning are obvious, others might be much harder, however, there are still tricks to do it, when we check headers of the site we must pay attention to these potential clues.
 
@@ -223,7 +223,7 @@ Now we see repos where that header is used and can read its code, comments, ques
 
 Now using the knowledge we have about HTTP headers we will cover other topics related to this subject. This Section covers techniques for exploiting weaknesses in HTTP headers, ranging from custom header abuse to cache poisoning and proxy misconfigurations.
 
-### **Vary HTTP header**
+## **Vary HTTP header**
 
 The Vary HTTP response header tells caches which request headers must be considered when deciding whether a cached response can be reused. Without Vary cache will assume `Same URL = same response` That assumption is often wrong. Vary corrects it by saying: `Same URL + same listed header values = same response`. 
 
@@ -247,7 +247,7 @@ This means that the cache will be reused if `Cache key = / + value of X-Forwarde
 > 
 > It only talks to caches.
 
-##### **Red Team Perspective**
+## **Red Team Perspective**
 
 If a header appears in the Vary response header, it means the application uses that header when generating the response and that directly implies that server (backend) is looking for that header and it is part of the application logic, which is signal for the Red Team to keep an eye on that header.
 
@@ -294,4 +294,4 @@ Example:
     
     Sure enough, the response confirmed that the X-Forwarded-Host header is being reflected in the HTML and is likely being trusted by the application.
     
-    This discovery paves the way to using the X-Forwarded-Host header to check for unexpected behaviors. Techniques such as spoofing, server-side request forgery (SSRF) and browser-powered desync attacks can potentially lead to **cache poisoning**. It might be possible to poison the cache if some responses use X-Forwarded-Host without including it in Vary.
+    This discovery paves the way to using the X-Forwarded-Host header to check for unexpected behaviors. Techniques such as spoofing, server-side request forgery (SSRF) and browser-powered desync attacks can potentially lead to **cache poisoning**. It might be possible to poison the cache if some responses use X-Forwarded-Host without including it in Vary. **Cache Poisoning** will be discussed in the next chapter of Security Headers!
