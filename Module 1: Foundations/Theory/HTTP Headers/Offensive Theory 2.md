@@ -18,11 +18,12 @@ In this section, we will focus on cache poisoning. Cache poisoning occurs when a
     
     1.2 Now we should look inside the HTML for anything that uses the host/domain dynamically, like:
     
-    1.  <script src="https://target-site.com/js/main.js">
-    2.  <link rel="stylesheet" href="https://target-site.com/css/style.css">
-    3.  <img src="https://target-site.com/images/logo.png">
-    4.  Any social meta tags like <meta property="og:image" content="https://target-site.com/og.jpg">
-    5.  Note the exact domain it uses (should be the real one).
+    1. <script src="https://target-site.com/js/main.js">
+    2. <link rel="stylesheet" href="https://target-site.com/css/style.css">
+    3. <img src="https://target-site.com/images/logo.png">
+    4. Any social meta tags like <meta property="og:image" content="https://target-site.com/og.jpg">
+    5. Note the exact domain it uses (should be the real one).
+
     
     1.3 Now we will send the fake request to see if there are any differences:
     

@@ -1,11 +1,11 @@
 # cURL Methodology Part 1: Observation
 
-This Section will cover **curl** command, how to use it and what to expect from it. This part will cover observation and analysis only. For practice we will mainly be using httpbin.org and DVWA.
+This guide documents cURL techniques for authorized security testing and penetration testing. I developed this methodology while practicing on intentionally vulnerable applications (DVWA) and testing environments. This is for security professionals, bug bounty hunters, and students learning offensive security for defensive purposes.
 
 > [!IMPORTANT]
-> You have to read the README.md file to be able access and setup the labs (if you don't know how).
+> You must have DVWA .
 
-#### **Module 0: Setup**
+## **Module 0: Setup**
 
 We will start by understanding the tool we have on hands. To do so lets see what our curl is capable of doing. We will use `--version`.
 
@@ -40,7 +40,7 @@ As you can probably guess I'm on fedora Linux. But that aside what does this inf
 > [!IMPORTANT]
 > curl is a **protocol speaker.** It connects to (IP, port) and speaks whatever the URL scheme says. The connection and request lifecycle is **DNS → TCP → Protocol → Application.** When troubleshooting pay attention to this information.
 
-### **Module 1: Foundations**
+## **Module 1: Foundations**
 
 Here we will try to fetch pages and read their headers and if something goes wrong we will troubleshoot it.
 
@@ -158,7 +158,7 @@ Here we will try to fetch pages and read their headers and if something goes wro
     ➜  Training-Camp curl -v https://httpbin.org/noneexistingdirectory321 >> 404.txt 2>&1 
     ```
 
-### **Module 2: Verbose Diagnostics**
+## **Module 2: Verbose Diagnostics**
 
 In this section we will learn to read verbose output. Now we will troubleshoot each layer of **connection and request lifecycle.**   
 
@@ -258,7 +258,7 @@ In this section we will learn to read verbose output. Now we will troubleshoot e
     ...
     ```
 
-### **Module 3: Response Analysis**
+## **Module 3: Response Analysis**
 
 In this section I will show you how to perform response analysis on specific examples and targets. 
 
